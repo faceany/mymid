@@ -1,0 +1,2 @@
+middleware_name: "nginx"
+prepare_package_dir: "{{playbook_dir}}/prepare_package/nginx"

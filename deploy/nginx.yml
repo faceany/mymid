@@ -1,0 +1,4 @@
+- hosts: nginx
+  gather_facts: no
+  roles:
+    - nginx

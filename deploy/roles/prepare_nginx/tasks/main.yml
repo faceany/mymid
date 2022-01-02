@@ -1,0 +1,19 @@
+- name: "delete {{middleware_name}} directory {{prepare_package_dir}}"
+  file:
+    path: "{{item}}"
+    state: absent
+  with_items:
+    - "{{prepare_package_dir}}"
+
+- name: "prepare {{middleware_name}} directory"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{prepare_package_dir}}"
+
+- name: "download {{middleware_name}} source package "
+  shell: "cd {{prepare_package_dir}};wget {{nginx_download_url}}; wget {{nginx_check_url}} ;"
+  delegate_to: "localhost"
+  run_once: true
+  ignore_errors: yes

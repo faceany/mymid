@@ -1,0 +1,39 @@
+- name: "delete {{middleware_name}} directory {{deploy_dir}}"
+  file:
+    path: "{{item}}"
+    state: absent
+  with_items:
+    - "{{deploy_dir}}"
+    - "{{work_dir}}"
+
+- name: "prepare {{middleware_name}} directory"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{deploy_dir}}"
+    - "{{work_dir}}"
+
+- name: "{{middleware_name}} source package unzip"
+  unarchive:
+    src: "{{prepare_package_dir}}/{{package_name}}"
+    dest: "{{work_dir}}"
+    remote_src: False
+    mode: 0755
+
+- name: "{{middleware_name}} build and install"
+  shell: "{{nginx_build_cmd}}"
+
+- name: "chown {{middleware_name}} "
+  file: "name={{ item }}  mode=0755"
+  with_items:
+    - "{{work_dir}}/{{middleware_name}}/sbin/nginx"
+
+- name: "restart {{middleware_name}}"
+  shell: "{{work_dir}}/{{middleware_name}}/sbin/nginx -s stop;{{work_dir}}/{{middleware_name}}/sbin/nginx";
+
+- name: "wait for {{middleware_name}} started"
+  wait_for:
+    port: "{{nginx_port}}"
+    delay: 5
+    timeout: 30

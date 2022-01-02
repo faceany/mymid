@@ -1,0 +1,5 @@
+middleware_name: "{{role_name}}"
+prepare_package_dir: "{{playbook_dir}}/prepare_package/{{role_name}}"
+deploy_dir: "{{nginx_deploy_dir}}"
+work_dir: "{{nginx_work_dir}}"
+package_name: "{{nginx_package_name}}"
