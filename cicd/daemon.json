@@ -1,0 +1,6 @@
+{
+  "live-restore": true,
+  "storage-driver":"overlay",
+  "graph": "/data/var/lib/docker",
+  "insecure-registries":["ccr.ccs.tencentyun.com"]
+}
