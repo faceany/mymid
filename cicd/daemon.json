@@ -2,5 +2,6 @@
   "live-restore": true,
   "storage-driver":"overlay",
   "graph": "/data/var/lib/docker",
+  "registry-mirrors": ["http://hub-mirror.c.163.com"],
   "insecure-registries":["ccr.ccs.tencentyun.com"]
 }
